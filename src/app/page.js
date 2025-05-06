@@ -1,95 +1,180 @@
-import Image from "next/image";
 import styles from "./page.module.css";
+import Banner from "@/components/banner/Banner";
+import Header from "@/components/header/Header";
+import Footer from "@/components/footer/Footer";
+import About from "@/components/about/About";
+import KeyFeatures from "@/components/keyFeatures/KeyFeatures";
+import Team from "@/components/team/Team";
+// import { logo } from "@/utils/ImageConstants";
+export const dynamic = "force-dynamic";
+// import { fetchGraphQL } from "/app/api/fetchGraphQL";
+// import { query } from "/app/api/queries/homepageQuery";
 
-export default function Home() {
+export default async function Home() {
+  const query = `
+{
+  pages(where: {name: "Homepage"}) {
+    nodes {
+      homepage {
+        banners {
+          bannerImage {
+            node {
+              sourceUrl
+            }
+          }
+          bannersTitle
+          bannerDescription
+          bannerButton {
+            title
+            url
+            target
+          }
+        }
+        homeAboutTitle
+        homeAboutSubtitle
+        homeAboutButton {
+          target
+          title
+          url
+        }
+        homeAboutVideoImage {
+          node {
+            sourceUrl
+          }
+        }
+        homeAboutVideoUrl
+        homeAboutDescription
+        homeCategoryTitle
+        homeCategorySubtitle
+        homeServicesTitle
+        homeServicesSubtitle
+        homeColoursTitle
+        homeColoursSubtitle
+        homeColoursButton {
+          target
+          title
+          url
+        }
+        homeJoinBackgroundImage {
+          node {
+            sourceUrl
+          }
+        }
+        homeJoinTitle
+        homeJoinSubtitle
+        homeJoinButton {
+          target
+          title
+          url
+        }
+        homeJoinDescription
+        blogTitle
+        blogSubtitle
+        categories {
+          link
+          title
+          image {
+            node {
+              sourceUrl
+            }
+          }
+        }
+      }
+      seo {
+        canonical
+        metaKeywords
+        metaDesc
+        title
+        opengraphType
+        opengraphSiteName
+        opengraphTitle
+        opengraphDescription
+        opengraphUrl
+        schema {
+          raw
+        }
+        opengraphImage {
+          mediaItemUrl
+        }
+      }
+    }
+  }
+  allColourCategory(where: {slug: "popular"}) {
+    nodes {
+      name
+      colours {
+        nodes {
+          title
+          slug
+          colourInfo {
+            selectColor
+            colourRgb
+          }
+        }
+      }
+    }
+  }
+  blogs {
+    nodes {
+      featuredImage {
+        node {
+          sourceUrl
+          slug
+        }
+      }
+      slug
+      title
+      date
+    }
+  }
+}
+`;
+
+const fetchGraphQL = async (query) => {
+  const response = await fetch('https://astralpaints.kwebmakerdigitalagency.com/graphql', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ query }),
+    cache: 'no-store'
+  });
+
+  const json = await response.json();
+
+  if (json.errors) {
+    console.error("GraphQL Errors:", json.errors);
+    throw new Error("Failed to fetch API");
+  }
+
+  return json.data;
+};
+
+// ✅ Now await will work
+const data = await fetchGraphQL(query);
+console.log("data --->", data);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+      <div className={styles.pageWrapper}>
+        <div className={styles.headerSticky}>
+          <Header />
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        <main className={styles.main}>
+        <Banner
+  subtitle={data?.pages?.nodes?.[0]?.homepage?.banners?.[0]?.bannerDescription}
+  heading={data?.pages?.nodes?.[0]?.homepage?.banners?.[0]?.bannersTitle}
+  highlight={data?.pages?.nodes?.[0]?.homepage?.banners?.[0]?.bannerDescription} // Using bannerDescription as a fallback for highlight
+  cta={[data?.pages?.nodes?.[0]?.homepage?.banners?.[0]?.bannerButton?.title]}
+  // backgroundImage={data?.pages?.nodes?.[0]?.homepage?.banners?.[1]?.bannerImage?.nodes?.[0]?.source}
+  backgroundImage={"https://astralpaints.kwebmakerdigitalagency.com/wp-content/uploads/2024/05/Exterior-Emulsions-Home-page-banner-1336-x-650.webp"}
+/>
+<About/>
+<KeyFeatures/>
+<Team/>
+        
+                </main>
+        <Footer />
+      </div>
   );
 }

@@ -1,0 +1,173 @@
+/* Footer.module.css */
+
+.footer {
+  background-color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  color: #1a1a1a;
+  padding: 50px 0px 0;
+
+}
+
+.footerTop {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logoSection {
+  flex: 1;
+  min-width: 150px;
+}
+
+.logo {
+  object-fit: contain;
+}
+
+.linksSection {
+  flex: 2.5;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 60px;
+}
+
+.footerNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.navColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.navLink {
+  color: #1a1a1a;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.navLink:hover {
+  color: #004f66;
+}
+
+.divider {
+  width: 100%;
+  border-top: 1px solid #dcdcdc;
+  margin: 30px 0;
+}
+
+.bottomContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto 30px;
+  gap: 30px;
+}
+
+.infoSection {
+  flex: 1;
+  min-width: 280px;
+}
+
+.infoTitle {
+  font-weight: 600;
+  font-size: 16px;
+  color: #004f66;
+  margin-bottom: 10px;
+}
+
+.address {
+  margin-bottom: 10px;
+  font-style: normal;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.contactItem a {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.icon {
+  font-size: 14px;
+  color: #004f66;
+}
+
+.socialSection {
+  flex: 1;
+  min-width: 200px;
+}
+
+.socialTitle {
+  font-weight: 600;
+  font-size: 16px;
+  color: #004f66;
+  margin-bottom: 10px;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 14px;
+}
+
+.socialIcon {
+  font-size: 18px;
+  color: #1a1a1a;
+  transition: color 0.3s;
+}
+
+.socialIcon:hover {
+  color: #004f66;
+}
+
+/* Footer Bottom Bar */
+.footerBottom {
+  background: linear-gradient(to right, #00394d, #004f66);
+  color: #ffffff;
+  font-size: 12px;
+  padding: 10px 20px;
+}
+
+.tagLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.termsLink,
+.privacyLink {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.termsLink:hover,
+.privacyLink:hover {
+  text-decoration: underline;
+}
+
+.copyrightText {
+  text-align: center;
+  flex-grow: 1;
+}

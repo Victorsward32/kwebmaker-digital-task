@@ -1,0 +1,157 @@
+.header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(90deg, #1b445d95 0%, #1b445d61 100%); /* Semi-transparent background for better readability */
+    z-index: 1000;
+  }
+  
+  .container {
+    /* max-width: 1200px; */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .logoContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .logo {
+    height: 2.5rem;
+    width: auto;
+  }
+  
+  .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    align-self: center;
+  }
+  
+  .navList {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .navList li a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: opacity 0.3s ease;
+  }
+  
+  .navList li a:hover {
+    opacity: 0.7;
+  }
+  
+  .contactBtn {
+    padding: 0.5rem 1.5rem;
+    border: 1px solid white;
+    background: transparent;
+    color: white;
+    border-radius: 1.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+    margin-top: 1rem;
+  }
+  
+  .contactBtn:hover {
+    background: white;
+    color: black;
+  }
+  
+  /* Hamburger menu (hidden on desktop) */
+  .menuToggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  
+  .hamburger,
+  .hamburger:before,
+  .hamburger:after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: white;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  
+  .hamburger:before {
+    top: -8px;
+  }
+  
+  .hamburger:after {
+    top: 5px;
+  }
+  
+  /* Desktop layout */
+  @media (min-width: 769px) {
+    .container {
+      flex-wrap: nowrap;
+    }
+    
+    .logoContainer {
+      width: auto;
+    }
+    
+    .nav {
+      flex-direction: row;
+      justify-content: space-between;
+      flex-grow: 1;
+      margin-left: 2rem;
+      width: auto;
+    }
+    
+    .navList {
+      margin: 0;
+    }
+    
+    .contactBtn {
+      margin-top: 0;
+      margin-left: 1rem;
+    }
+  }
+  
+  /* Mobile layout */
+  @media (max-width: 768px) {
+    .menuToggle {
+      display: block;
+    }
+    
+    .nav {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    
+    .navOpen {
+      max-height: 500px;
+    }
+    
+    .navList {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      gap: 0.8rem;
+    }
+  }
