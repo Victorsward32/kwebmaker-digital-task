@@ -25,11 +25,15 @@ export default function Banner({ subtitle, heading, highlight, cta, backgroundIm
                     </div>
                 </div>
             </div>
-            <img
-    src={backgroundImage}
-    alt="Background"
-    className={styles.backgroundImage}
-/>
+
+            <Image
+                src={backgroundImage}
+                alt="Background"
+                className={styles.backgroundImage}
+                fill
+                priority
+                sizes="100vw"
+            />
         </section>
     );
 }
